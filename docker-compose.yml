@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis:7
+    container_name: redis_server
+    ports:
+      - "6379:6379"
+
+  php:
+    build: ./php
+    container_name: php_script
+    depends_on:
+      - redis
+    volumes:
+      - ./php:/usr/src/app
+    working_dir: /usr/src/app
